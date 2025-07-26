@@ -4,30 +4,22 @@ import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchRevenue, fetchLatestInvoices, fetchCardData } from '@/app/lib/data';
 
+// This is the WATERFALL approach (sequential) - NOT RECOMMENDED
 export default async function Page() {
-  // PARALLEL FETCHING - All requests start at the same time
-  const revenuePromise = fetchRevenue();
-  const latestInvoicesPromise = fetchLatestInvoices();
-  const cardDataPromise = fetchCardData();
-
-  // Wait for all requests to complete
-  const [revenue, latestInvoices, cardData] = await Promise.all([
-    revenuePromise,
-    latestInvoicesPromise,
-    cardDataPromise,
-  ]);
-
+  // This creates a waterfall - each request waits for the previous one
+  const revenue = await fetchRevenue(); // Wait for this to complete
+  const latestInvoices = await fetchLatestInvoices(); // Then wait for this
   const {
     numberOfInvoices,
     numberOfCustomers,
     totalPaidInvoices,
     totalPendingInvoices,
-  } = cardData;
+  } = await fetchCardData(); // Finally wait for this
 
   return (
     <main>
       <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Dashboard
+        Dashboard (Sequential - Waterfall)
       </h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Card title="Collected" value={totalPaidInvoices} type="collected" />

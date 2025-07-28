@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
-  title: 'Chapter 15: Adding Authentication | Next.js Dashboard',
+  title: 'Chapter 15: Adding Authentication',
   description: 'Learn about authentication with NextAuth.js, middleware protection, and secure user sessions',
 };
 

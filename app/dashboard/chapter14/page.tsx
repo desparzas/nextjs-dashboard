@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
-  title: 'Chapter 14: Improving Accessibility | Next.js Dashboard',
+  title: 'Chapter 14: Improving Accessibility',
   description: 'Learn about accessibility features, form validation, and server-side validation with Next.js',
 };
 
